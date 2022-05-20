@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Validation</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-text {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="bg-image d-flex flex-column justify-content-center" style="background-image: url('https://i.pinimg.com/564x/60/4e/2b/604e2be16c333d1e50a842059158d5f6.jpg');
+               height: 100vh">
+
+        <div class="d-flex justify-content-center">
+            <div class="col-md-3 col-md-offset-3 portlets ui-sortable">
+
+                <div class="widget">
+                    <div class="widget-header transparent">
+
+
+                    </div>
+                    <div class="widget-content padding">
+                        <div id="basic-form">
+                            <form id="myform">
+                                <div class="mb-3">
+                                    <label style="color: rgba(104, 56, 2, 0.87);" for="name_label"
+                                        class="form-label"><b>NOM:</b></label>
+                                    <input type="text" class="form-control" id="name">
+                                    <span id="error"></span>
+                                    <span id="valid"></span>
+                                    <div style="text-align: center;" id="valider" class="form-text"><b>valider votre
+                                            NOM</b></div>
+                                </div>
+
+                                <button style="color: #fff;
+                                background-color: rgba(99, 65, 3, 0.418);
+                                border-color: rgb(53, 39, 1); margin: 0 auto; display: block;">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        let myForm = document.getElementById('myform');
+        //ajouter un evenement
+        myForm.addEventListener('submit',
+            function (e) {
+                //recuperer le input
+                let myInput = document.getElementById('name');
+                let myError = document.getElementById('error');
+                let validation = document.getElementById('valid');
+                validation.innerHTML = "";
+                //on autorise les lettres (maj et mini) et 
+                //les tiretes pour les mots composés et aussi l'espace
+                let myRegex = /^[a-zA-Z-\s]+$/;
+                if (myInput.value.trim() == "")//la fonction trim retire les espaces de debut et de fin
+                {
+                    //on recupere le span d'error
+                    myError.innerHTML = "Le champ est obligatoire";
+                    myError.style.color = 'black';
+                    //empecher l'evenement par defaut qui est lorsequ'on clique sur le bouton 
+                    //ça nous dirige vers la page traitement
+                    e.preventDefault();
+                } else if (myRegex.test(myInput.value) == false)//c'est àdire qu'il a trouvé une occurence
+                {
+                    myError.innerHTML = "Le non est non valide";
+                    myError.style.color = 'black';
+                    e.preventDefault();
+                }
+                else if (myInput.value.length > 20) {
+                    myError.innerHTML = "le nom est non valide";
+                    myError.style.color = 'black';
+                    e.preventDefault();
+                }
+                else {
+                    myError.innerHTML = "";
+                    validation.innerHTML = "le nom est valide";
+                    validation.style.color = "white";
+                    e.preventDefault();
+                }
+
+
+            });
+    </script>
+
+</body>
+
+</html>
