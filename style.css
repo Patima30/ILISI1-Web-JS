@@ -1,0 +1,40 @@
+body{
+    background-color:violet ;
+}
+
+table,td{
+    text-align: center;
+    margin: 10px;
+}
+
+
+form{
+    width: 50%;
+    margin: 0 auto 15px auto;
+    margin-top: 200px;
+    color:rgb(135, 0, 150);
+    font-weight: bold;
+}
+fieldset{
+    margin:20px;
+    padding:0 10px 10px;
+    border:1px solid rgb(135, 0, 150);
+    border-radius:8px;
+    box-shadow:0 0 10px rgb(135, 0, 150);
+    padding-top:10px;
+}
+legend{
+    padding: 2px 4px;
+    text-align: center;
+    color:black;
+    font-size:25px;
+}
+input{
+    width: 250px;
+    color: white;
+    background-color:rgba(10,5,5,100) ;
+}
+label{
+    margin: 5px;
+    margin-left: 20px;
+}
