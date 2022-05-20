@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>formulaire de connexion</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <style>
+    body {
+      background: #d9dbdb;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .myform {
+      border-style: double;
+      border-radius: 30px;
+      margin: 50px;
+      padding: 20px;
+    }
+
+    button {
+      margin: 10px;
+      border-radius: 10px;
+      background-color: rgb(70, 107, 107);
+      color: white;
+    }
+
+    input {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <form id="myform" class="myform">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Nom : </label>
+      <input type="text" class="form-control" id="nom" aria-des placeholder="Enter nom">
+      <span id="erreur1"></span>
+      <span id="valid1"></span>
+
+    </div>
+
+    <div id="loginfor">
+
+    </div>
+    <button type="submit">Envoyer</button>
+    <button type="button" onclick="ajouterElem();">Ajouter Dom</button>
+  </form>
+</body>
+
+</html>
+
+<script type="text/javascript">
+  var id = 0;
+
+
+
+  let myform = document.getElementById('myform');
+  let nomv = /^[a-zA-Z\s]+$/
+  myform.addEventListener('submit', function (e) {
+
+
+    let n = document.getElementById('nom');
+    let p = document.getElementById('prenom');
+
+    let er1 = document.getElementById("erreur1");
+    let v = document.getElementById("valid1");
+
+    v.innerHTML = "";
+
+    if (n.value.trim() == "") {
+      console.log("test");
+      er1.innerHTML = "Le champ nom est obligatoire";
+      er1.style.color = "red";
+      e.preventDefault();
+    }
+    else if (!nomv.test(n.value)) {
+      er1.innerHTML = "le nom doit comporter que des lettre et espace";
+      er1.style.color = "red";
+      e.preventDefault();
+    }
+    else {
+      er1.innerHTML = "";
+      v.innerHTML = "le nom est valide";
+      v.style.color = "green";
+      e.preventDefault();
+    }
+
+    if (id > 0) {
+      let er2 = document.getElementById("erreur2");
+      let v2 = document.getElementById("valid2");
+      v2.innerHTML = "";
+      if (p.value.trim() == "") {
+        er2.innerHTML = "Le champ prenom est obligatoire";
+        er2.style.color = "red";
+        e.preventDefault();
+      }
+      else if (!nomv.test(p.value)) {
+        er2.innerHTML = "le prenom doit comporter que des lettre et espace";
+        er2.style.color = "red";
+        e.preventDefault();
+      }
+      else {
+        er2.innerHTML = "";
+        v2.innerHTML = "Le prenom est valide";
+        v2.style.color = "green";
+        e.preventDefault();
+      }
+
+    }
+
+  });
+
+  function ajouterElem(e) {
+
+    if (id == 0) {
+      // création des nouveaux noeuds
+      var nouveauDiv = document.getElementById('loginfor');
+      var nouveauLabel = document.createElement('label');
+      var nouveauInput = document.createElement('input');
+      var nouveauESpan = document.createElement('span');
+      var nouveauVSpan = document.createElement('span');
+      // paramétrage des nouveaux noeuds
+      nouveauLabel.appendChild(document.createTextNode("Prénom :"));
+      nouveauInput.name = 'nouveau';
+      nouveauInput.setAttribute('type', 'text');
+      nouveauInput.setAttribute('class', 'form-control');
+      nouveauInput.setAttribute('id', 'prenom');
+      nouveauInput.setAttribute('placeholder', 'Entrer prenom');
+      nouveauESpan.setAttribute('id', 'erreur2');
+      nouveauVSpan.setAttribute('id', 'valid2');
+
+      nouveauDiv.appendChild(nouveauLabel);
+      nouveauDiv.appendChild(nouveauInput);
+      nouveauDiv.appendChild(nouveauESpan);
+      nouveauDiv.appendChild(nouveauVSpan);
+      id++;
+    }
+  }
+</script>
