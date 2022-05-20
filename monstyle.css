@@ -1,0 +1,147 @@
+@import 'https://fonts.googleapis.com/css?family=Josefin+Sans:400i';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #2980b9 url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+  -webkit-animation: 10s linear 0s normal none infinite animate;
+  -moz-animation: 10s linear 0s normal none infinite animate;
+  -ms-animation: 10s linear 0s normal none infinite animate;
+  -o-animation: 10s linear 0s normal none infinite animate;
+  animation: 10s linear 0s normal none infinite animate;
+
+}
+
+@-webkit-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@-moz-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@-ms-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@-o-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 500px 0;
+  }
+}
+
+h1 {
+  font-size: 1.3em;
+  text-align: center;
+  color: #2C3E50;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+@media only screen and (min-width:900px) {
+  h1 {
+    font-size: 1.7em;
+  }
+}
+
+label {
+  font-size: 16px;
+  color: #4e4d58;
+
+}
+
+form {
+  margin-top: 40px;
+  position: relative;
+  width: 95%;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width:900px) {
+  form {
+    margin-top: 40px;
+    width: 45%;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+@media only screen and (min-width:900px) {
+  .form-group {
+    position: relative;
+    margin-bottom: 45px;
+  }
+}
+
+input {
+  font-size: 48px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+input:focus~label,
+input:valid~label {
+  top: -20px;
+  font-size: 14px;
+  color: #4e4d58;
+}
+
+
+
+.btn {
+  margin-left: 130px;
+  margin-right: 0 auto;
+  width: 50%;
+  height: 20%;
+}
+
+@media only screen and (min-width:900px) {
+  .btn {
+    margin-left: 80px;
+    margin-right: 0 auto;
+    width: 70%;
+    height: 20%;
+  }
+}

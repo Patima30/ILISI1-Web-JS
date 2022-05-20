@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auth Chieh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/login/modernizr.js"></script> <!-- Modernizr -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <style>
+    @import 'https://fonts.googleapis.com/css?family=Josefin+Sans:400i';
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #2980b9 url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+      -webkit-animation: 10s linear 0s normal none infinite animate;
+      -moz-animation: 10s linear 0s normal none infinite animate;
+      -ms-animation: 10s linear 0s normal none infinite animate;
+      -o-animation: 10s linear 0s normal none infinite animate;
+      animation: 10s linear 0s normal none infinite animate;
+
+    }
+
+    @-webkit-keyframes animate {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 500px 0;
+      }
+    }
+
+    @-moz-keyframes animate {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 500px 0;
+      }
+    }
+
+    @-ms-keyframes animate {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 500px 0;
+      }
+    }
+
+    @-o-keyframes animate {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 500px 0;
+      }
+    }
+
+    @keyframes animate {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 500px 0;
+      }
+    }
+
+    h1 {
+      font-size: 1.3em;
+      text-align: center;
+      color: #2C3E50;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    @media only screen and (min-width:900px) {
+      h1 {
+        font-size: 1.7em;
+      }
+    }
+
+
+    label {
+      font-size: 18px;
+      color: #4e4d58;
+    }
+
+    form {
+      margin-top: 40px;
+      position: relative;
+      width: 95%;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media only screen and (min-width:900px) {
+      form {
+        margin-top: 70px;
+        width: 45%;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 45px;
+    }
+
+    @media only screen and (min-width:900px) {
+      .form-group {
+        position: relative;
+        margin-bottom: 45px;
+      }
+    }
+
+    input {
+      font-size: 48px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      width: 300px;
+      border: none;
+      border-bottom: 1px solid #757575;
+    }
+
+    input:focus~label,
+    input:valid~label {
+      top: -20px;
+      font-size: 14px;
+      color: #4e4d58;
+    }
+
+
+
+    .btn {
+      margin-left: 25%;
+      margin-right: 0 auto;
+      width: 40%;
+      height: 20%;
+    }
+
+    @media only screen and (min-width:900px) {
+      .btn {
+        margin-left: 25%;
+        margin-right: 0 auto;
+        width: 40%;
+        height: 20%;
+      }
+    }
+  </style>
+
+<body>
+  <div class="container">
+    <h1>AUTHENTIFICATION</h1>
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <form method="post" id="myform" action="">
+          <div class="form-group">
+            <label>E-mail :</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="exemple@gmail.com">
+          </div>
+          <div class="form-group">
+            <label>Password :</label>
+            <input type="password" id="psw" name="psw" class="form-control" placeholder="********">
+          </div>
+          <button type="submit" class="btn btn-outline-dark" id="bto">envoyer</button><br><br>
+          <a href="Chieh_inscription_JQuery.html">Revenir à la page d'inscription</a><br><br>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      $("#myform").validate({
+        rules: {
+          email: {
+            required: true,
+            email: true,
+            normalizer: function (value) {
+              return $.trim(value);
+            },
+          }, psw: {
+            required: true,
+            minlength: 8,
+          },
+        },
+        messages: {
+          email:
+          {
+            required: "Remplir ce champs",
+            email: "L'email est non valide",
+          },
+          psw: {
+            required: "Remplir ce champs",
+            minlength: "le champs doit obtenir au moins 8 caracteres",
+          },
+        },
+        submitHandler: function (form) {
+
+
+          let email = $("#email").val();
+          let pass = $("#psw").val();
+          let passwhashae = sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(pass));
+
+          //recuperer de local storage
+          let user = localStorage.getItem(email);
+          var data = JSON.parse(user);//transformer en objet            
+          //faire le test
+          if (email == data.email && passwhashae == data.psw) {
+            alert("Authentification avec succes");
+          }
+          else {
+            alert("Le mot de passe ou l'email sont incorrecte");
+          }
+
+
+
+
+        }
+
+      }
+      )
+    });
+  </script>
+</body>
+
+</html>

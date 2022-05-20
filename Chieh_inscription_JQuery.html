@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/login/modernizr.js"></script> <!-- Modernizr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <title>PAGE d'INSCRIPTION</title>
+    <link href="monstyle.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>INSCRIPTION</h1>
+        <div class="col-md-6 offset-3">
+            <form method="post" id="myform" action="">
+                <div class="form-group">
+                    <label>Nom :</label>
+                    <input type="text" id="nom" name="nom" class="form-control" placeholder="nom">
+                    <span id="error2"></span>
+                </div>
+                <div class="form-group">
+                    <label>E-mail :</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="exemple@gmail.com">
+
+                </div>
+
+                <div class="form-group">
+                    <label>Password :</label>
+                    <input type="password" id="psw" name="psw" class="form-control" placeholder="********">
+                </div>
+                <div class="form-group">
+                    <label>Confirner password :</label>
+                    <input type="password" id="confpsw" name="confpsw" class="form-control" placeholder="********">
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="btn-login">Create Account
+                </button> <br><br>
+                <a href="Chieh_authentification_JQuery.html">Vous avez un compte? Veuillez
+                    s'authentifier</a><br><br>
+            </form>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script>
+        jQuery.validator.addMethod("lettersonly", function (value, element) {
+            return this.optional(element) || /^(([a-z]+)?(\b(\-|'))?(\b\s+)?([a-z]+?)(\s+)?)+$/i.test(value);
+        }, "ce champs doit contenir des lettres");
+        $("#myform").validate(
+            {
+                rules: {
+                    nom:
+                    {
+                        required: true,
+                        minlength: 4,
+                        lettersonly: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+
+
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                    }, psw: {
+                        required: true,
+                        minlength: 8,
+                    },
+                    confpsw: {
+                        required: true,
+                        minlength: 8,
+                        equalTo: "#psw"
+                    }
+                },
+                messages: {
+                    nom:
+                    {
+                        required: "Remplir ce champs",
+                        minlength: "le champs doit obtenir au moins 4 caracteres",
+                    },
+                    email:
+                    {
+                        required: "Remplir ce champs",
+                        email: "veuillez entrer un email valide",
+                    },
+                    psw: {
+                        required: "Remplir ce champs",
+                        minlength: "le champs doit obtenir au moins 8 caracteres",
+                    },
+                    confpsw: {
+                        required: "Remplir ce champs",
+                        minlength: "le champs doit obtenir au moins 8 caracteres",
+                        equalTo: "les deux mots de passe doivent etre les memes"
+                    }
+                },
+                submitHandler: function (form) {
+                    let psw = document.querySelector("#psw").value;
+                    let nom = document.querySelector("#nom").value;
+                    let email = document.querySelector("#email").value;
+                    let passwhashae = sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(psw));
+                    //affecter l'objet
+                    var user = {
+                        nom: nom,
+                        psw: passwhashae,
+                        email: email
+                    };
+                    //transformer en un string
+                    var json = JSON.stringify(user);
+                    localStorage.setItem(email, json);
+                    console.log('compte cree');
+                    alert('votre compte est cree');
+                    form.submit();
+                }
+            }
+        )
+    </script>
+
+</body>
+
+</html>
